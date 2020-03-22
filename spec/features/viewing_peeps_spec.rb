@@ -6,9 +6,9 @@ feature 'viewing peeps' do
 
   scenario 'A user can see peeps' do
     visit('/peeps')
-    expect(page).to have_content "Having a chilled weekend"
-    expect(page).to have_content "2nd day of isolation"
-    expect(page).to have_content "Coffee time"
+    expect(page).to have_content "3rd day of isolation!"
+    expect(page).to have_content "Sunny day"
+    expect(page).to have_content "Way too much screen time"
 
   end
 
