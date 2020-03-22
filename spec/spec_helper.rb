@@ -13,7 +13,6 @@ RSpec.configure do |config|
   end
 end
 
-
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
 Capybara.app = Chitter
