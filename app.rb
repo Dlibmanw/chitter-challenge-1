@@ -20,8 +20,7 @@ class Chitter < Sinatra::Base
     p params
     p "Form data submitted to the /bookmarks route!"
     text = params["text"]
-    connection = PG.connect(dbname: 'chitter_peeps1_test')
-    connection.exec("INSERT INTO peeps (text) VALUES('#{text}');")
+    Peep.create(text)
     redirect '/peeps'
   end
 
