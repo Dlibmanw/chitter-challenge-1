@@ -5,10 +5,9 @@ feature 'viewing peeps' do
   end
 
   scenario 'A user can see peeps' do
-    connection = PG.connect(dbname: 'chitter_peeps1_test')
-    connection.exec("INSERT INTO peeps (text) VALUES('3rd day of isolation, almost done');")
-    connection.exec("INSERT INTO peeps (text) VALUES('Sunny week');")
-    connection.exec("INSERT INTO peeps (text) VALUES('Way too much screen time today');")
+    Peep.create('3rd day of isolation, almost done')
+    Peep.create('Sunny week')
+    Peep.create('Way too much screen time today')
     visit('/peeps')
     expect(page).to have_content "3rd day of isolation, almost done"
     expect(page).to have_content "Sunny week"
