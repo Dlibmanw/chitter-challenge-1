@@ -19,8 +19,7 @@ class Chitter < Sinatra::Base
   post '/peeps' do
     p params
     p "Form data submitted to the /bookmarks route!"
-    text = params["text"]
-    Peep.create(text)
+    Peep.create(params[:text])
     redirect '/peeps'
   end
 

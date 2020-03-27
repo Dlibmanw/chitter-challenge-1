@@ -14,4 +14,12 @@ describe 'Peep' do
     end
   end
 
+  describe '.create' do
+    it 'insert a new peep to the database' do
+      Peep.create('Testing my new create method')
+      peeps = Peep.all
+      expect(peeps).to include('Testing my new create method')
+    end
+  end
+
 end
