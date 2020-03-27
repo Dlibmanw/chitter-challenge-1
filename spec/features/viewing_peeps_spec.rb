@@ -5,9 +5,9 @@ feature 'viewing peeps' do
   end
 
   scenario 'A user can see peeps' do
-    Peep.create('3rd day of isolation, almost done')
-    Peep.create('Sunny week')
-    Peep.create('Way too much screen time today')
+    Peep.create(text: '3rd day of isolation, almost done')
+    Peep.create(text: 'Sunny week')
+    Peep.create(text: 'Way too much screen time today')
     visit('/peeps')
     expect(page).to have_content "3rd day of isolation, almost done"
     expect(page).to have_content "Sunny week"

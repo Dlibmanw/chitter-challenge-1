@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'tux'
 
 group :test do
   gem 'capybara'

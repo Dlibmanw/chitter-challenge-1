@@ -11,7 +11,7 @@ class Peep
     result.map { |peep| peep['text'] }
   end
 
-  def self.create(text)
+  def self.create(text:)
     if ENV['RACK_ENV'] == 'test'
       connection = PG.connect(dbname: 'chitter_peeps1_test')
     else
