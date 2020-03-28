@@ -1,5 +1,5 @@
 require 'peep'
-
+require 'database_helpers'
 describe 'Peep' do
   describe '.all' do
     it 'returns all peeps' do
@@ -16,9 +16,11 @@ describe 'Peep' do
 
   describe '.create' do
     it 'insert a new peep to the database' do
-      Peep.create(text: 'Testing my new create method')
-      peeps = Peep.all
-      expect(peeps).to include('Testing my new create method')
+      peep = Peep.create(text: 'Testing my updated create method')
+      persisted_data = persisted_data(id: peep.id)
+      expect(peep).to be_a Peep
+      expect(peep.id).to eq persisted_data['id']
+      expect(peep.text).to eq 'Testing my updated create method'
     end
   end
 
