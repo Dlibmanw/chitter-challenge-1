@@ -15,7 +15,8 @@ class Peep
       connection = PG.connect(dbname: 'chitter_peeps1')
     end
     result = connection.exec('SELECT * FROM peeps;')
-    result.map { |peep| peep['text'] }
+    result.map { |peep| Peep.new(id: peep['id'], text: peep['text']) }
+
   end
 
   def self.create(text:)

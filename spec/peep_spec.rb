@@ -4,13 +4,17 @@ describe 'Peep' do
   describe '.all' do
     it 'returns all peeps' do
       connection = PG.connect(dbname: 'chitter_peeps1_test')
-      connection.exec("INSERT INTO peeps (text) VALUES('3rd day of isolation!');")
-      connection.exec("INSERT INTO peeps (text) VALUES('Sunny day');")
-      connection.exec("INSERT INTO peeps (text) VALUES('Way too much screen time');")
+      peep = Peep.create(text: '3rd day of isolation!')
+      Peep.create(text: 'Sunny day')
+      Peep.create(text: 'Way too much screen time')
+
       peeps = Peep.all
-      expect(peeps).to include("3rd day of isolation!")
-      expect(peeps).to include("Sunny day")
-      expect(peeps).to include("Way too much screen time")
+
+      expect(peeps.length).to eq 3
+      expect(peeps.first).to be_a Peep
+      expect(peeps.first.id).to eq peep.id
+      expect(peeps.first.text).to eq '3rd day of isolation!'
+
     end
   end
 
