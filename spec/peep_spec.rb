@@ -3,7 +3,6 @@ require 'database_helpers'
 describe 'Peep' do
   describe '.all' do
     it 'returns all peeps' do
-      connection = PG.connect(dbname: 'chitter_peeps1_test')
       peep = Peep.create(text: '3rd day of isolation!')
       Peep.create(text: 'Sunny day')
       Peep.create(text: 'Way too much screen time')
@@ -30,7 +29,7 @@ describe 'Peep' do
   describe '.delete' do
     it 'removes a peep' do
       peep = Peep.create(text: 'A new post to test my Delete button')
-      persisted_data = persisted_data(id: peep.id)
+      persisted_data(id: peep.id)
       Peep.delete(id: peep.id)
       expect(Peep.all.length).to eq 0
     end
@@ -51,10 +50,10 @@ describe 'Peep' do
   describe '.find' do
     it 'return a specificied peep object' do
       peep = Peep.create(text: 'Using the new find method!')
-      the_post_Im_looking_for = Peep.find(id: peep.id)
-      expect(the_post_Im_looking_for).to be_a Peep
-      expect(the_post_Im_looking_for.id).to eq peep.id
-      expect(the_post_Im_looking_for.text).to eq 'Using the new find method!'
+      my_peep = Peep.find(id: peep.id)
+      expect(my_peep).to be_a Peep
+      expect(my_peep.id).to eq peep.id
+      expect(my_peep.text).to eq 'Using the new find method!'
     end
   end
 

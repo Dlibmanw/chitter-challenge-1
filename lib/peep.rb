@@ -44,8 +44,8 @@ class Peep
     else
       connection = PG.connect(dbname: 'chitter_peeps1')
     end    
-    result = connection.exec("UPDATE peeps SET text = '#{text}' WHERE id = '#{id}' RETURNING id, text;")
-    updated_peep = Peep.new(id: result[0]['id'], text: result[0]['text'])
+    result = connection.exec("UPDATE peeps SET text = '#{text}' WHERE id = '#{id}' RETURNING id, text")
+    Peep.new(id: result[0]['id'], text: result[0]['text'])
   end
 
   def self.find(id:)
