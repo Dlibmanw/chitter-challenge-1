@@ -28,4 +28,12 @@ describe 'Peep' do
     end
   end
 
+  describe '.delete' do
+    it 'removes a peep' do
+      peep = Peep.create(text: 'A new post to test my Delete button')
+      persisted_data = persisted_data(id: peep.id)
+      Peep.delete(id: peep.id)
+      expect(Peep.all.length).to eq 0
+    end
+  end
 end

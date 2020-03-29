@@ -27,10 +27,8 @@ class Chitter < Sinatra::Base
   enable :sessions, :method_override
 
   delete '/peeps/:id' do
-    connection = PG.connect(dbname: 'chitter_peeps1_test')
-    connection.exec("DELETE FROM peeps WHERE id = #{params['id']}")
+    Peep.delete(id: params['id'])
     redirect '/peeps'
-    #lets print out the form params
     p params
   end
 
