@@ -8,7 +8,6 @@ class Chitter < Sinatra::Base
   end
 
   get '/peeps' do
-    p ENV
     @peeps = Peep.all
     erb :'peeps/index'
   end
@@ -18,8 +17,6 @@ class Chitter < Sinatra::Base
   end
 
   post '/peeps' do
-    p params
-    p "Form data submitted to the /bookmarks route!"
     Peep.create(text: params['text'])
     redirect '/peeps'
   end
@@ -29,7 +26,16 @@ class Chitter < Sinatra::Base
   delete '/peeps/:id' do
     Peep.delete(id: params['id'])
     redirect '/peeps'
-    p params
+  end
+
+  get '/peeps/:id/edit' do
+    @peep = Peep.find(id: params[:id])
+    erb :'peeps/edit'
+  end
+
+  patch '/peeps/:id' do
+    Peep.update(id: params['id'], text: params['text'])
+    redirect('/peeps')
   end
 
   run! if app_file == $0

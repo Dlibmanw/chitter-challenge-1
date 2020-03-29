@@ -38,4 +38,23 @@ class Peep
     connection.exec("DELETE FROM peeps WHERE id = #{id}")
   end
 
+  def self.update(id:, text:)
+    if ENV['RACK_ENV'] == 'test'
+      connection = PG.connect(dbname: 'chitter_peeps1_test')
+    else
+      connection = PG.connect(dbname: 'chitter_peeps1')
+    end    
+    result = connection.exec("UPDATE peeps SET text = '#{text}' WHERE id = '#{id}' RETURNING id, text;")
+    updated_peep = Peep.new(id: result[0]['id'], text: result[0]['text'])
+  end
+
+  def self.find(id:)
+    if ENV['RACK_ENV'] == 'test'
+      connection = PG.connect(dbname: 'chitter_peeps1_test')
+    else
+      connection = PG.connect(dbname: 'chitter_peeps1')
+    end
+    result = connection.exec("SELECT * FROM peeps WHERE id = '#{id}'")
+    Peep.new(id: result[0]['id'], text: result[0]['text'])
+  end
 end
